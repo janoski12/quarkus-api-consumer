@@ -2,7 +2,7 @@ package com.example;
 
 import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.ws.rs.core.MediaType;
+
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -19,12 +19,4 @@ public class ApiTest {
             .body(notNullValue());
     }
 
-    @Test
-    public void testGetDigimonByName() {
-        given()
-            .when().get("/api/digimon/agumon")
-            .then()
-            .statusCode(200)
-            .contentType(MediaType.APPLICATION_JSON);
-    }
 }

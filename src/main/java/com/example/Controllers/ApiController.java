@@ -1,20 +1,21 @@
 package com.example.Controllers;
 
-
 import java.util.List;
 
-
+import com.example.Models.DigimonResponse;
 import com.example.Models.DragonBallCharacter;
-import com.example.Services.DigimonService;
+import com.example.Services.DigimonRestTemplate;
+import com.example.Services.DigimonWebClientService;
 import com.example.Services.DragonBallService;
 
+import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import reactor.core.publisher.Flux;
 
 
 @Path("/api")
@@ -26,17 +27,27 @@ public class ApiController {
     DragonBallService dragonBallService;
 
     @Inject
-    DigimonService digimonService;
+    DigimonWebClientService digimonWebClientService;
+
+    @Inject
+    DigimonRestTemplate digimonRestTemplate;
 
     @GET
     @Path("/dragonball")
     public List<DragonBallCharacter> getSaiyanMales() {
         return dragonBallService.getFilteredCharacters();
     }
-    
+
     @GET
-    @Path("/digimon/{name}")
-    public String getDigimon(@PathParam("name") String name) {
-        return digimonService.getDigimonByName(name);
+    @Path("/digimon/webclient")
+    public Uni<List<DigimonResponse>> getDigimonWithWebClient() {
+        return digimonWebClientService.fetchDigimons();
     }
+
+    @GET
+    @Path("/digimon/resttemplate")
+    public List<DigimonResponse> getDigimonWithRestTemplate() {
+        return digimonRestTemplate.fetchDigimons();
+    }
+    
 }
