@@ -131,11 +131,11 @@ public class DragonBallService {
                     planetList.add(fullPlanet);
                 }
             } catch (Exception e) {
-                System.err.println("❌ Error obteniendo detalles del planeta ID " + planet.getId() + ": " + e.getMessage());
+                System.err.println(" Error obteniendo detalles del planeta ID " + planet.getId() + ": " + e.getMessage());
             }
         }
     
-        System.out.println("📊 Planetas obtenidos: " + planetList.size());
+        System.out.println(" Planetas obtenidos: " + planetList.size());
         return planetList;
     }
     
@@ -158,7 +158,7 @@ public class DragonBallService {
         }
         
         List<DragonBallCharacter> characters = response.getBody();
-        System.out.println("👤 Personajes obtenidos: " + characters.size());
+        System.out.println(" Personajes obtenidos: " + characters.size());
         return characters;
     }
 }
