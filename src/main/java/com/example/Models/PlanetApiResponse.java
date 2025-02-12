@@ -2,6 +2,7 @@ package com.example.Models;
 
 import java.util.List;
 
+import com.example.dtos.Planet;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

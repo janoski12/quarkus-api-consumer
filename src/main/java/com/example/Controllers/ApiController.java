@@ -3,10 +3,9 @@ package com.example.Controllers;
 import java.util.List;
 
 import com.example.Models.DigimonResponse;
-import com.example.Models.DragonBallCharacter;
-import com.example.Services.DigimonRestTemplate;
 import com.example.Services.DigimonWebClientService;
 import com.example.Services.DragonBallService;
+import com.example.dtos.DragonBallCharacter;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
@@ -15,7 +14,6 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import reactor.core.publisher.Flux;
 
 
 @Path("/api")
@@ -29,9 +27,6 @@ public class ApiController {
     @Inject
     DigimonWebClientService digimonWebClientService;
 
-    @Inject
-    DigimonRestTemplate digimonRestTemplate;
-
     @GET
     @Path("/dragonball")
     public List<DragonBallCharacter> getSaiyanMales() {
@@ -42,12 +37,6 @@ public class ApiController {
     @Path("/digimon/webclient")
     public Uni<List<DigimonResponse>> getDigimonWithWebClient() {
         return digimonWebClientService.fetchDigimons();
-    }
-
-    @GET
-    @Path("/digimon/resttemplate")
-    public List<DigimonResponse> getDigimonWithRestTemplate() {
-        return digimonRestTemplate.fetchDigimons();
     }
     
 }

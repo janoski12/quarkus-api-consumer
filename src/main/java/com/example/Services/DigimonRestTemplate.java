@@ -31,8 +31,9 @@ public class DigimonRestTemplate {
 
     private DigimonResponse filterDigimonData(DigimonResponse digimon) {
         digimon.setDescriptions(digimon.getDescriptions().stream()
-                .filter(d -> "EN".equalsIgnoreCase(d.getLanguage()))
+                .filter(d -> "en_us".equalsIgnoreCase(d.getLanguage()) || "en".equalsIgnoreCase(d.getLanguage()))
                 .collect(Collectors.toList()));
         return digimon;
     }
+
 }

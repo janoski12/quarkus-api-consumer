@@ -12,9 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.example.Models.DragonBallCharacter;
-import com.example.Models.Planet;
 import com.example.Models.PlanetApiResponse;
+import com.example.dtos.DragonBallCharacter;
+import com.example.dtos.Planet;
 
 import jakarta.enterprise.context.ApplicationScoped;
 

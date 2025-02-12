@@ -10,27 +10,28 @@ import com.example.Models.DigimonResponse;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 
 @ApplicationScoped
 public class DigimonWebClientService {
     
-    @RestClient
-    DigimonRestClient digimonRestClient;
-
-    public Uni<List<DigimonResponse>> fetchDigimons() {
-        List<String> digimons = List.of("leviamon", "mugendramon", "sakuyamon");
-
-        List<CompletableFuture<DigimonResponse>> futures = digimons.stream()
+        @Inject
+        @RestClient
+        DigimonRestClient digimonRestClient;
+        
+        public Uni<List<DigimonResponse>> fetchDigimons() {
+            List<String> digimons = List.of("leviamon", "mugendramon", "sakuyamon");
+            
+            List<CompletableFuture<DigimonResponse>> futures = digimons.stream()
                 .map(name -> digimonRestClient.fetchDigimon(name)
-                        .toCompletableFuture())
+                    .toCompletableFuture())
                 .collect(Collectors.toList());
-
-        return Uni.createFrom().completionStage(
+                
+            return Uni.createFrom().completionStage(
                 CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
-                        .thenApply(v -> futures.stream()
-                                .map(CompletableFuture::join)
-                                .collect(Collectors.toList()))
-        );
-    }
+                    .thenApply(v -> futures.stream()
+                        .map(CompletableFuture::join)
+                        .collect(Collectors.toList()))
+            );
 }
