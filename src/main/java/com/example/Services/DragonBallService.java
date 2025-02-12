@@ -39,14 +39,14 @@ public class DragonBallService {
             .filter(c -> "Raditz".equals(c.getName()))
             .findFirst()
             .ifPresent(raditz -> {
-                System.out.println("🔍 Información de Raditz:");
+                System.out.println(" Información de Raditz:");
                 System.out.println("   ID: " + raditz.getId());
                 System.out.println("   Nombre: " + raditz.getName());
                 System.out.println("   Raza: " + raditz.getRace());
             });
 
         // Debug: Imprimir información de planetas y sus personajes
-        System.out.println("\n📝 Información de planetas y sus personajes:");
+        System.out.println("\n Información de planetas y sus personajes:");
         allPlanets.forEach(planet -> {
             System.out.println("\nPlaneta: " + planet.getName());
             System.out.println("ID: " + planet.getId());
@@ -80,19 +80,19 @@ public class DragonBallService {
                         String characterName = character.getName();
 
                         // Debug: Imprimir búsqueda de planeta
-                        System.out.println("\n🔎 Buscando planeta para " + character.getName() + " (Name: " + characterName + ")");
+                        System.out.println("\n Buscando planeta para " + character.getName() + " (Name: " + characterName + ")");
                         
                         List<Planet> characterPlanets = characterPlanetMap.get(characterName);
                         
                         if (characterPlanets != null && !characterPlanets.isEmpty()) {
                             character.setOriginPlanet(characterPlanets);
-                            System.out.println("✅ Personaje: " + character.getName() + 
+                            System.out.println(" Personaje: " + character.getName() + 
                                              " | Planetas encontrados: " + 
                                              characterPlanets.stream()
                                                  .map(Planet::getName)
                                                  .collect(Collectors.joining(", ")));
                         } else {
-                            System.out.println("⚠️ No se encontraron planetas para: " + character.getName());
+                            System.out.println(" No se encontraron planetas para: " + character.getName());
                             // Crear planeta desconocido si no se encuentra ninguno
                             Planet unknown = new Planet();
                             unknown.setId(null);
