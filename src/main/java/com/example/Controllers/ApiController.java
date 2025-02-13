@@ -2,7 +2,7 @@ package com.example.Controllers;
 
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.example.Models.DragonBallCharacter;
 import com.example.Services.DigimonService;
@@ -12,7 +12,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -35,8 +34,8 @@ public class ApiController {
     }
     
     @GET
-    @Path("/digimon/{name}")
-    public String getDigimon(@PathParam("name") String name) {
-        return digimonService.getDigimonByName(name);
+    @Path("/digimon")
+    public List<Map<String, Object>> getDigimons() {
+        return digimonService.getDigimons();
     }
 }
